@@ -78,5 +78,6 @@
         }
       ]
     }
-  ]
+  ],
+  "generation": "vultr-go-access-v1"
 }
