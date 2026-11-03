@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "question": "When this subscription is cancelled, should access remain through the paid period or end immediately?",
+  "question": "When a customer cancels, should we keep paid access, end access, or propose a prorated refund?",
   "choices": [
     {
       "id": "keep",
@@ -75,6 +75,69 @@
           "path": "subscription.json",
           "key": "access_ends",
           "equals": "immediately"
+        }
+      ]
+    },
+    {
+      "id": "refund",
+      "title": "Cancel now and propose a prorated refund for unused time",
+      "changes": [
+        {
+          "path": "subscription.json",
+          "before_sha256": "c0dd7fc10d4b05055720c3faf8f8916e14f369106246585ee38671eee277577c",
+          "content": "{\n  \"subscription_status\": \"cancelled\",\n  \"renewal_enabled\": false,\n  \"access_granted\": false,\n  \"access_ends\": \"immediately\",\n  \"paid_cents\": 3000,\n  \"period_days\": 30,\n  \"unused_days\": 18,\n  \"proposed_refund_cents\": 1800,\n  \"refund_status\": \"proposed\"\n}\n"
+        },
+        {
+          "path": "access.go",
+          "before_sha256": "3de7334a53e3e0d2c7270236a721a1b49b195b895b0ff31d24c2957557b105ed",
+          "content": "package subscription\n\n// HasAccess implements the owner-selected cancellation policy.\nfunc HasAccess(paidUntil, now int64) bool { return false }\n"
+        }
+      ],
+      "checks": [
+        {
+          "path": "subscription.json",
+          "key": "subscription_status",
+          "equals": "cancelled"
+        },
+        {
+          "path": "subscription.json",
+          "key": "renewal_enabled",
+          "equals": false
+        },
+        {
+          "path": "subscription.json",
+          "key": "access_granted",
+          "equals": false
+        },
+        {
+          "path": "subscription.json",
+          "key": "access_ends",
+          "equals": "immediately"
+        },
+        {
+          "path": "subscription.json",
+          "key": "paid_cents",
+          "equals": 3000
+        },
+        {
+          "path": "subscription.json",
+          "key": "period_days",
+          "equals": 30
+        },
+        {
+          "path": "subscription.json",
+          "key": "unused_days",
+          "equals": 18
+        },
+        {
+          "path": "subscription.json",
+          "key": "proposed_refund_cents",
+          "equals": 1800
+        },
+        {
+          "path": "subscription.json",
+          "key": "refund_status",
+          "equals": "proposed"
         }
       ]
     }
