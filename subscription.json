@@ -1,6 +1,11 @@
 {
-  "subscription_status": "active",
-  "renewal_enabled": true,
-  "access_granted": true,
-  "access_ends": "paid_period_end"
+  "subscription_status": "cancelled",
+  "renewal_enabled": false,
+  "access_granted": false,
+  "access_ends": "immediately",
+  "paid_cents": 3000,
+  "period_days": 30,
+  "unused_days": 18,
+  "proposed_refund_cents": 1800,
+  "refund_status": "proposed"
 }
