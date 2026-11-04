@@ -1,6 +1,6 @@
 {
-  "subscription_status": "active",
-  "renewal_enabled": true,
+  "subscription_status": "cancelled",
+  "renewal_enabled": false,
   "access_granted": true,
   "access_ends": "paid_period_end"
 }
