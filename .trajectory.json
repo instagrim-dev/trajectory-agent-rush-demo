@@ -142,5 +142,6 @@
       ]
     }
   ],
-  "generation": "vultr-go-access-v1"
+  "generation": "vultr-go-access-v1",
+  "delivery": "on-decision"
 }
